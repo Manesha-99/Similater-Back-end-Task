@@ -1,3 +1,5 @@
+export const port = 5000;
+
 export const dbConfig = 
     {
         host: 'localhost',
@@ -6,4 +8,4 @@ export const dbConfig =
         database: 'login_system'
     }
 
-export const port = 5000;
+export const jwt_Secret = 'similater_Back_end_Task';
