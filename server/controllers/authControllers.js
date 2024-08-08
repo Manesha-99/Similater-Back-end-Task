@@ -9,17 +9,23 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const [results] = await db.execute('SELECT * FROM user_details WHERE email = ?', [email]);
-    if (results.length === 0) return res.status(400).send('Wrong Credentials..');
+    const [results, fields] = db.query('SELECT * FROM user_details WHERE email = ?', [email], );
+    
+    // if (results.length === 0) return res.status(400).send('Wrong Credentials..');
 
-    const user = results[0];
-    const validPassword = await bcrypt.compare(password, user.password);
-    if (!validPassword) return res.status(400).send('Wrong Credentials..');
+    // const user = results[0];
+    // console.log(results);
+    
+    // const validPassword = await bcrypt.compare(password, user.password);
+    // if (!validPassword) return res.status(400).send('Wrong Credentials..');
 
-    const token = jwt.sign({ id: user.id, email: user.email }, jwt_Secret);
-    res.send({ token });
+    // const token = jwt.sign({ id: user.id, email: user.email, is_admin: user.is_admin }, jwt_Secret);
+    // return res.json({ token, is_admin: user.is_admin });
+    return res.send("done")
   } catch (err) {
-    res.status(500).send('Internal Server error..');
+    console.log(err.message);
+    
+    return res.status(500).send('Internal Server error..');
   }
 };
 
