@@ -1,7 +1,17 @@
 import express from 'express'
+import {port} from './config/config.js'
+import { db } from './db/db.js';
 
 const app = express();
+app.use(express.json());
 
-app.listen(3001, ()=>{
-    console.log("port is listening on port 3001");
-})
+
+db.getConnection((err) => {
+    if (err) throw err;
+    console.log('MySQL Connected...');
+});
+
+
+app.listen(port,()=>{
+    console.log(`Server is listening on port ${port}`);
+});
